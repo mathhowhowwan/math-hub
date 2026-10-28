@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>數學教學中心</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,13 +12,16 @@
       background: #1a1a2e;
       color: #eee;
       height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
     header {
       background: linear-gradient(135deg, #16213e, #0f3460);
-      padding: 14px 24px;
+      padding: 14px max(24px, env(safe-area-inset-right, 0px)) 14px max(24px, env(safe-area-inset-left, 0px));
+      padding-top: max(14px, env(safe-area-inset-top, 0px));
       display: flex;
       align-items: center;
       gap: 16px;
@@ -43,10 +46,15 @@
       background: #16213e;
       border-bottom: 2px solid #0f3460;
       flex-shrink: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     nav button {
       padding: 12px 28px;
+      min-height: 44px;
+      white-space: nowrap;
+      flex-shrink: 0;
       background: none;
       border: none;
       color: #aaa;
@@ -80,6 +88,7 @@
 
     .frame-container {
       flex: 1;
+      min-height: 0;
       position: relative;
     }
 
@@ -119,6 +128,17 @@
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 768px) {
+      header { padding-top: max(10px, env(safe-area-inset-top, 0px)); padding-bottom: 10px; padding-left: max(14px, env(safe-area-inset-left, 0px)); padding-right: max(14px, env(safe-area-inset-right, 0px)); }
+      header h1 { font-size: 1.05em; }
+      header .subtitle { font-size: 0.72em; }
+      nav button { flex: 1; justify-content: center; padding: 10px 14px; font-size: 0.9em; }
+    }
+    @media (max-height: 480px) and (orientation: landscape) {
+      header { padding-top: 6px; padding-bottom: 6px; }
+      header .subtitle { display: none; }
+    }
   </style>
 </head>
 <body>
